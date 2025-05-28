@@ -4,9 +4,35 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
+        const headerHeight = document.querySelector('.site-header') ? document.querySelector('.site-header').offsetHeight : 0;
+        const viewportHeight = window.innerHeight;
+        const bodyHeight = document.body.offsetHeight;
 
         if (targetElement) {
-            targetElement.scrollIntoView({
+            let scrollTargetY;
+
+            if (targetId === '#intro') {
+                scrollTargetY = 0;
+            } else if (targetId === '#contact') {
+                scrollTargetY = bodyHeight - viewportHeight;
+            } else {
+                const sectionTopAbs = targetElement.offsetTop;
+                const sectionHeight = targetElement.offsetHeight;
+                const visibleViewportHeight = viewportHeight - headerHeight;
+
+                if (sectionHeight > visibleViewportHeight) {
+                    scrollTargetY = sectionTopAbs - headerHeight;
+                } else {
+                    const centerInVisibleY = sectionTopAbs + (sectionHeight / 2) - (viewportHeight / 2) - (headerHeight / 2);
+                    scrollTargetY = Math.min(sectionTopAbs - headerHeight, centerInVisibleY);
+                }
+            }
+
+            scrollTargetY = Math.max(0, scrollTargetY);
+            scrollTargetY = Math.min(scrollTargetY, bodyHeight - viewportHeight);
+
+            window.scrollTo({
+                top: scrollTargetY,
                 behavior: 'smooth'
             });
         }
@@ -14,21 +40,44 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 window.addEventListener('scroll', () => {
-    let current = '';
-    const sections = document.querySelectorAll('main section');
-    const navLi = document.querySelectorAll('.main-nav ul li a');
-    const headerOffset = document.querySelector('.site-header').offsetHeight + 20;
+    let currentSectionId = '';
+    const navLinks = document.querySelectorAll('.main-nav ul li a');
+    const headerHeight = document.querySelector('.site-header') ? document.querySelector('.site-header').offsetHeight : 0;
+    const viewportHeight = window.innerHeight;
+    const scrollY = window.pageYOffset;
+    const bodyHeight = document.body.offsetHeight;
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - headerOffset;
-        if (pageYOffset >= sectionTop) {
-            current = section.getAttribute('id');
+    if (scrollY < 50) {
+        currentSectionId = 'intro';
+    } else {
+        const mainSections = document.querySelectorAll('main section');
+        const effectiveViewportMidY = scrollY + headerHeight + (viewportHeight - headerHeight) / 2;
+        let foundMainSectionId = '';
+
+        mainSections.forEach(section => {
+            const sectionId = section.getAttribute('id');
+            if (sectionId === 'intro') return;
+
+            const sectionTopAbsolute = section.offsetTop;
+            const sectionBottomAbsolute = sectionTopAbsolute + section.offsetHeight;
+
+            if (effectiveViewportMidY >= sectionTopAbsolute && effectiveViewportMidY < sectionBottomAbsolute) {
+                foundMainSectionId = sectionId;
+            }
+        });
+
+        if (foundMainSectionId) {
+            currentSectionId = foundMainSectionId;
+        } else {
+            if (viewportHeight + Math.ceil(scrollY) >= bodyHeight - 10) {
+                currentSectionId = 'contact';
+            }
         }
-    });
+    }
 
-    navLi.forEach(a => {
+    navLinks.forEach(a => {
         a.classList.remove('active');
-        if (a.getAttribute('href').includes(current)) {
+        if (a.getAttribute('href') === `#${currentSectionId}`) {
             a.classList.add('active');
         }
     });
