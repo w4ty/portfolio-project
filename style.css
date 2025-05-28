@@ -119,6 +119,14 @@ img {
 .site-main section {
     padding: 40px 0;
     border-bottom: 1px solid #ddd;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.site-main section.is-visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .site-main section:last-child {
@@ -127,6 +135,54 @@ img {
 
 .intro-section {
     background: #fff;
+    height: 100vh;
+}
+
+.scroll-arrow-container:hover{
+    background-color: #333;
+    border-color: white;
+}
+
+.scroll-arrow-container:hover .scroll-arrow-down{
+    border-color: white;
+    transform: rotate(45deg) translateY(2px);
+}
+.intro-upper-container{
+    height: 50%;
+    width: 100%;
+}
+.intro-lower-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+}
+
+.scroll-arrow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    background-color: white;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.scroll-arrow-down {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-style: solid;
+    border-color: #333;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
 .project-grid {
