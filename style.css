@@ -167,6 +167,18 @@ img {
     display: flex;
     flex-wrap: wrap; 
     gap: 10px; 
+    justify-content: center;
+}
+
+.tech-section {
+    padding: 40px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.site-footer {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
 }
 
 .tech-list li {
@@ -177,8 +189,6 @@ img {
 }
 
 .contact-section {
-    background: #333;
-    color: #fff;
     text-align: center;
     padding: 30px 0;
 }
@@ -192,7 +202,7 @@ img {
 }
 
 .contact-section a {
-    color: #7fdbff;
+    color: #2833ff;
 }
 
 @media (min-width: 768px) {
