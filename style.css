@@ -100,8 +100,42 @@ img {
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
 }
 
+.project-item img{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    transition: transform 0.3s ease 0s;
+}
+
+.project-link{
+    text-decoration: none;
+    color: black;
+}
+
+.project-date{
+    margin-top: 0;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.project-item img:hover{
+    transform: scale(1.05);
+}
+
 .project-item h3 {
     margin-top: 0;
+}
+
+.project-tag{
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    overflow-wrap: normal;
 }
 
 .timeline-item {
