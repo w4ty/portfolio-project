@@ -143,3 +143,8 @@ if (sectionsToAnimate.length > 0) {
         sectionObserver.observe(section);
     });
 } 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const currentYear = new Date().getFullYear();
+    document.getElementById('currentYear').textContent = currentYear;
+});
