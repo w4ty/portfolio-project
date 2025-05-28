@@ -1,4 +1,6 @@
+
 body {
+    overflow-x: hidden;
     font-family: sans-serif;
     margin: 0;
     line-height: 1.6;
@@ -38,7 +40,8 @@ img {
     backdrop-filter: blur(10px);
     color: #fff;
     padding: 1rem 0;
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 1000;
 }
@@ -138,6 +141,7 @@ img {
 .intro-section {
     height: 100vh;
     display: flex;
+    align-items: center;
     justify-content: center;
     text-align: center;
     position: relative;
@@ -169,7 +173,6 @@ img {
     color: #fff;
     max-width: 650px;
     width: 90%;
-    height: 50%;
 
     opacity: 0;
     transform: translateY(30px);
@@ -188,6 +191,7 @@ img {
     margin-bottom: 0.4em;
     color: #e0f2f7;
     font-weight: 600;
+    margin-top: 0;
 }
 
 .intro-tagline {
