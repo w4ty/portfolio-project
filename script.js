@@ -32,15 +32,4 @@ window.addEventListener('scroll', () => {
             a.classList.add('active');
         }
     });
-
-    const contactSection = document.querySelector('#contact');
-    if (contactSection) {
-        const contactSectionTop = contactSection.offsetTop - headerOffset;
-        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - contactSection.offsetHeight) {
-            navLi.forEach(a => a.classList.remove('active')); 
-            document.querySelector('.main-nav ul li a[href="#contact"]').classList.add('active');
-        } else if (current === '') {
-             document.querySelector('.main-nav ul li a[href="#intro"]').classList.add('active');
-        }
-    }
 }); 
